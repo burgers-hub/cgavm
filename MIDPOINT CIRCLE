@@ -1,0 +1,67 @@
+/*---------------------------------------------------------
+    Program: Midpoint Circle Drawing Algorithm
+    Author : Student Name
+    Date   :
+
+    Description:
+        This program draws a circle using the Midpoint
+        Circle Drawing Algorithm. It uses symmetry to
+        plot points in all 8 octants.
+----------------------------------------------------------*/
+
+#include <graphics.h>
+#include <conio.h>
+#include <stdio.h>
+
+void main()
+{
+    int gd = DETECT, gm;
+    int xc, yc, r;
+    int x, y, p;
+
+    clrscr();
+
+    printf("Enter center of circle (xc yc): ");
+    scanf("%d %d", &xc, &yc);
+
+    printf("Enter radius: ");
+    scanf("%d", &r);
+
+    initgraph(&gd, &gm, "C:\\TURBOC3\\BGI");
+
+    /* Initial values */
+    x = 0;
+    y = r;
+    p = 1 - r;
+
+    /*---------------------------------------------------------
+        Midpoint Circle Drawing Algorithm
+    ----------------------------------------------------------*/
+    while(x <= y)
+    {
+        /* Plot all 8 symmetric points */
+        putpixel(xc + x, yc + y, WHITE);
+        putpixel(xc - x, yc + y, WHITE);
+        putpixel(xc + x, yc - y, WHITE);
+        putpixel(xc - x, yc - y, WHITE);
+        putpixel(xc + y, yc + x, WHITE);
+        putpixel(xc - y, yc + x, WHITE);
+        putpixel(xc + y, yc - x, WHITE);
+        putpixel(xc - y, yc - x, WHITE);
+
+        x++;
+
+        if(p < 0)
+        {
+            p = p + 2 * x + 1;
+        }
+        else
+        {
+            y--;
+            p = p + 2 * (x - y) + 1;
+        }
+    }
+
+    getch();
+    closegraph();
+}

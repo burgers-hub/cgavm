@@ -1,0 +1,49 @@
+/*---------------------------------------------------------
+    Program: Moving Car Animation
+    Author : Student Name
+    Date   :
+
+    Description:
+        This program draws a simple car and moves it
+        from left to right using graphics in Turbo C.
+----------------------------------------------------------*/
+
+#include <graphics.h>
+#include <conio.h>
+#include <dos.h>
+
+void main()
+{
+    int gd = DETECT, gm;
+    int i;
+
+    initgraph(&gd, &gm, "C:\\TURBOC3\\BGI");
+
+    /*---------------------------------------------------------
+        Moving Car Logic
+    ----------------------------------------------------------*/
+    for(i = 0; i < 500; i++)
+    {
+        cleardevice();
+
+        /* Car Body */
+        rectangle(50 + i, 300, 200 + i, 350);
+
+        /* Car Top */
+        line(70 + i, 300, 100 + i, 260);
+        line(100 + i, 260, 150 + i, 260);
+        line(150 + i, 260, 180 + i, 300);
+
+        /* Wheels */
+        circle(90 + i, 360, 10);
+        circle(160 + i, 360, 10);
+
+        /* Road */
+        line(0, 370, 640, 370);
+
+        delay(20);   /* Controls speed */
+    }
+
+    getch();
+    closegraph();
+}

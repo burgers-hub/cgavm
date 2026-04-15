@@ -1,0 +1,118 @@
+/*---------------------------------------------------------
+    Program: 2D Transformations on Triangle
+    Author : Student Name
+    Date   :
+
+    Description:
+        This program performs 2D transformations on a triangle:
+        1. Translation
+        2. Rotation
+        3. Scaling
+----------------------------------------------------------*/
+
+#include <graphics.h>
+#include <conio.h>
+#include <stdio.h>
+#include <math.h>
+
+void main()
+{
+    int gd = DETECT, gm;
+
+    int x1, y1, x2, y2, x3, y3;
+    int tx, ty;
+    float sx, sy, angle;
+    int choice;
+
+    /* Transformed coordinates */
+    int x1t, y1t, x2t, y2t, x3t, y3t;
+
+    clrscr();
+
+    printf("Enter coordinates of triangle:\n");
+    scanf("%d %d %d %d %d %d", &x1, &y1, &x2, &y2, &x3, &y3);
+
+    printf("\n1. Translation");
+    printf("\n2. Rotation");
+    printf("\n3. Scaling");
+    printf("\nEnter your choice: ");
+    scanf("%d", &choice);
+
+    initgraph(&gd, &gm, "C:\\TURBOC3\\BGI");
+
+    /* Draw original triangle */
+    line(x1, y1, x2, y2);
+    line(x2, y2, x3, y3);
+    line(x3, y3, x1, y1);
+
+    /*---------------------------------------------------------
+        Translation
+    ----------------------------------------------------------*/
+    if(choice == 1)
+    {
+        printf("Enter translation factors (tx ty): ");
+        scanf("%d %d", &tx, &ty);
+
+        x1t = x1 + tx;
+        y1t = y1 + ty;
+
+        x2t = x2 + tx;
+        y2t = y2 + ty;
+
+        x3t = x3 + tx;
+        y3t = y3 + ty;
+    }
+
+    /*---------------------------------------------------------
+        Rotation
+    ----------------------------------------------------------*/
+    else if(choice == 2)
+    {
+        printf("Enter angle in degrees: ");
+        scanf("%f", &angle);
+
+        angle = angle * 3.14 / 180;   /* Convert to radians */
+
+        x1t = x1 * cos(angle) - y1 * sin(angle);
+        y1t = x1 * sin(angle) + y1 * cos(angle);
+
+        x2t = x2 * cos(angle) - y2 * sin(angle);
+        y2t = x2 * sin(angle) + y2 * cos(angle);
+
+        x3t = x3 * cos(angle) - y3 * sin(angle);
+        y3t = x3 * sin(angle) + y3 * cos(angle);
+    }
+
+    /*---------------------------------------------------------
+        Scaling
+    ----------------------------------------------------------*/
+    else if(choice == 3)
+    {
+        printf("Enter scaling factors (sx sy): ");
+        scanf("%f %f", &sx, &sy);
+
+        x1t = x1 * sx;
+        y1t = y1 * sy;
+
+        x2t = x2 * sx;
+        y2t = y2 * sy;
+
+        x3t = x3 * sx;
+        y3t = y3 * sy;
+    }
+
+    else
+    {
+        printf("Invalid choice!");
+    }
+
+    /* Draw transformed triangle */
+    setcolor(RED);
+
+    line(x1t, y1t, x2t, y2t);
+    line(x2t, y2t, x3t, y3t);
+    line(x3t, y3t, x1t, y1t);
+
+    getch();
+    closegraph();
+}
